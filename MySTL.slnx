@@ -3,6 +3,6 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="MySTL/MySTL.vcxproj" />
-  <Project Path="Tests/Tests.vcxproj" />
+  <Project Path="MySTL/MySTL.vcxproj" Id="eeeec347-d13b-4b35-9b04-7f560cc0f1d7" />
+  <Project Path="Tests/Tests.vcxproj" Id="8e895024-9c3b-4049-9495-8df627d0a2b0" />
 </Solution>

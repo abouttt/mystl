@@ -129,6 +129,9 @@
   <ItemGroup>
     <ClCompile Include="src\dummy.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\mystl\type_traits.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
