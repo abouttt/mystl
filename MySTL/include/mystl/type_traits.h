@@ -1,5 +1,8 @@
 #pragma once
 
+// Compiler-dependent traits are intentionally delegated to std::type_traits.
+#include <type_traits>
+
 namespace mystl
 {
 
@@ -435,13 +438,13 @@ namespace detail
 {
 
 template <typename T, bool = is_arithmetic<T>::value>
-struct is_signed : integral_constant<bool, T(-1) < T(0)> {};
+struct is_signed : integral_constant<bool, (T(-1) < T(0))> {};
 
 template <typename T>
 struct is_signed<T, false> : false_type {};
 
 template <typename T, bool = is_arithmetic<T>::value>
-struct is_unsigned : integral_constant<bool, T(0) < T(-1)> {};
+struct is_unsigned : integral_constant<bool, (T(0) < T(-1))> {};
 
 template <typename T>
 struct is_unsigned<T, false> : false_type {};
@@ -490,5 +493,179 @@ public:
 
 template <typename T>
 using decay_t = typename decay<T>::type;
+
+template <typename T, typename... Args>
+struct is_constructible : bool_constant<std::is_constructible_v<T, Args...>> {};
+
+template <typename T, typename... Args>
+constexpr bool is_constructible_v = is_constructible<T, Args...>::value;
+
+template <typename T, typename... Args>
+struct is_trivially_constructible : bool_constant<std::is_trivially_constructible_v<T, Args...>> {};
+
+template <typename T, typename... Args>
+constexpr bool is_trivially_constructible_v = is_trivially_constructible<T, Args...>::value;
+
+template <typename T, typename... Args>
+struct is_nothrow_constructible : bool_constant<std::is_nothrow_constructible_v<T, Args...>> {};
+
+template <typename T, typename... Args>
+constexpr bool is_nothrow_constructible_v = is_nothrow_constructible<T, Args...>::value;
+
+template <typename T>
+struct is_default_constructible : bool_constant<std::is_default_constructible_v<T>> {};
+
+template <typename T>
+constexpr bool is_default_constructible_v = is_default_constructible<T>::value;
+
+template <typename T>
+struct is_trivially_default_constructible : bool_constant<std::is_trivially_default_constructible_v<T>> {};
+
+template <typename T>
+constexpr bool is_trivially_default_constructible_v = is_trivially_default_constructible<T>::value;
+
+template <typename T>
+struct is_nothrow_default_constructible : bool_constant<std::is_nothrow_default_constructible_v<T>> {};
+
+template <typename T>
+constexpr bool is_nothrow_default_constructible_v = is_nothrow_default_constructible<T>::value;
+
+template <typename T>
+struct is_copy_constructible : bool_constant<std::is_copy_constructible_v<T>> {};
+
+template <typename T>
+constexpr bool is_copy_constructible_v = is_copy_constructible<T>::value;
+
+template <typename T>
+struct is_trivially_copy_constructible : bool_constant<std::is_trivially_copy_constructible_v<T>> {};
+
+template <typename T>
+constexpr bool is_trivially_copy_constructible_v = is_trivially_copy_constructible<T>::value;
+
+template <typename T>
+struct is_nothrow_copy_constructible : bool_constant<std::is_nothrow_copy_constructible_v<T>> {};
+
+template <typename T>
+constexpr bool is_nothrow_copy_constructible_v = is_nothrow_copy_constructible<T>::value;
+
+template <typename T>
+struct is_move_constructible : bool_constant<std::is_move_constructible_v<T>> {};
+
+template <typename T>
+constexpr bool is_move_constructible_v = is_move_constructible<T>::value;
+
+template <typename T>
+struct is_trivially_move_constructible : bool_constant<std::is_trivially_move_constructible_v<T>> {};
+
+template <typename T>
+constexpr bool is_trivially_move_constructible_v = is_trivially_move_constructible<T>::value;
+
+template <typename T>
+struct is_nothrow_move_constructible : bool_constant<std::is_nothrow_move_constructible_v<T>> {};
+
+template <typename T>
+constexpr bool is_nothrow_move_constructible_v = is_nothrow_move_constructible<T>::value;
+
+template <typename T, typename U>
+struct is_assignable : bool_constant<std::is_assignable_v<T, U>> {};
+
+template <typename T, typename U>
+constexpr bool is_assignable_v = is_assignable<T, U>::value;
+
+template <typename T, typename U>
+struct is_trivially_assignable : bool_constant<std::is_trivially_assignable_v<T, U>> {};
+
+template <typename T, typename U>
+constexpr bool is_trivially_assignable_v = is_trivially_assignable<T, U>::value;
+
+template <typename T, typename U>
+struct is_nothrow_assignable : bool_constant<std::is_nothrow_assignable_v<T, U>> {};
+
+template <typename T, typename U>
+constexpr bool is_nothrow_assignable_v = is_nothrow_assignable<T, U>::value;
+
+template <typename T>
+struct is_copy_assignable : bool_constant<std::is_copy_assignable_v<T>> {};
+
+template <typename T>
+constexpr bool is_copy_assignable_v = is_copy_assignable<T>::value;
+
+template <typename T>
+struct is_trivially_copy_assignable : bool_constant<std::is_trivially_copy_assignable_v<T>> {};
+
+template <typename T>
+constexpr bool is_trivially_copy_assignable_v = is_trivially_copy_assignable<T>::value;
+
+template <typename T>
+struct is_nothrow_copy_assignable : bool_constant<std::is_nothrow_copy_assignable_v<T>> {};
+
+template <typename T>
+constexpr bool is_nothrow_copy_assignable_v = is_nothrow_copy_assignable<T>::value;
+
+template <typename T>
+struct is_move_assignable : bool_constant<std::is_move_assignable_v<T>> {};
+
+template <typename T>
+constexpr bool is_move_assignable_v = is_move_assignable<T>::value;
+
+template <typename T>
+struct is_trivially_move_assignable : bool_constant<std::is_trivially_move_assignable_v<T>> {};
+
+template <typename T>
+constexpr bool is_trivially_move_assignable_v = is_trivially_move_assignable<T>::value;
+
+template <typename T>
+struct is_nothrow_move_assignable : bool_constant<std::is_nothrow_move_assignable_v<T>> {};
+
+template <typename T>
+constexpr bool is_nothrow_move_assignable_v = is_nothrow_move_assignable<T>::value;
+
+template <typename T>
+struct is_destructible : bool_constant<std::is_destructible_v<T>> {};
+
+template <typename T>
+constexpr bool is_destructible_v = is_destructible<T>::value;
+
+template <typename T>
+struct is_trivially_destructible : bool_constant<std::is_trivially_destructible_v<T>> {};
+
+template <typename T>
+constexpr bool is_trivially_destructible_v = is_trivially_destructible<T>::value;
+
+template <typename T>
+struct is_nothrow_destructible : bool_constant<std::is_nothrow_destructible_v<T>> {};
+
+template <typename T>
+constexpr bool is_nothrow_destructible_v = is_nothrow_destructible<T>::value;
+
+template <typename T>
+struct has_virtual_destructor : bool_constant<std::has_virtual_destructor_v<T>> {};
+
+template <typename T>
+constexpr bool has_virtual_destructor_v = has_virtual_destructor<T>::value;
+
+template <typename T, typename U>
+struct is_swappable_with : bool_constant<std::is_swappable_with_v<T, U>> {};
+
+template <typename T, typename U>
+constexpr bool is_swappable_with_v = is_swappable_with<T, U>::value;
+
+template <typename T>
+struct is_swappable : bool_constant<std::is_swappable_v<T>> {};
+
+template <typename T>
+constexpr bool is_swappable_v = is_swappable<T>::value;
+
+template <typename T, typename U>
+struct is_nothrow_swappable_with : bool_constant<std::is_nothrow_swappable_with_v<T, U>> {};
+
+template <typename T, typename U>
+constexpr bool is_nothrow_swappable_with_v = is_nothrow_swappable_with<T, U>::value;
+
+template <typename T>
+struct is_nothrow_swappable : bool_constant<std::is_nothrow_swappable_v<T>> {};
+
+template <typename T>
+constexpr bool is_nothrow_swappable_v = is_nothrow_swappable<T>::value;
 
 } // namespace mystl
