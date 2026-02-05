@@ -26,5 +26,8 @@
     <ClInclude Include="include\mystl\cstddef.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\mystl\utility.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
