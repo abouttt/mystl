@@ -37,7 +37,7 @@ constexpr void swap(T2(&a)[N], T2(&b)[N])
 
 	for (std::size_t i = 0; i < N; ++i)
 	{
-		swap(a[i], b[i]);
+		mystl::swap(a[i], b[i]);
 	}
 }
 
@@ -173,7 +173,6 @@ operator<=>(const pair<T1, T2>& lhs, const pair<U1, U2>& rhs)
 	{
 		return c;
 	}
-
 	return lhs.second <=> rhs.second;
 }
 
