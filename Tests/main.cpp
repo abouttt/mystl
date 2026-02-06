@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "mystl/utility.h"
+#include "mystl/memory.h"
 
 int main()
 {
