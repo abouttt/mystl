@@ -20,12 +20,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\mystl\type_traits.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\mystl\cstddef.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\mystl\utility.h">
       <Filter>Header Files</Filter>
     </ClInclude>

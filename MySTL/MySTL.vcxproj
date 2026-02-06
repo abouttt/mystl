@@ -130,8 +130,6 @@
     <ClCompile Include="src\dummy.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\mystl\cstddef.h" />
-    <ClInclude Include="include\mystl\type_traits.h" />
     <ClInclude Include="include\mystl\utility.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
