@@ -130,6 +130,7 @@
     <ClCompile Include="src\dummy.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\mystl\detail\iterator_base.h" />
     <ClInclude Include="include\mystl\utility.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
