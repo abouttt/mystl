@@ -191,17 +191,9 @@ NoThrowForwardIt uninitialized_move(InputIt first, InputIt last, NoThrowForwardI
 {
 	using ValueType = typename mystl::iterator_traits<NoThrowForwardIt>::value_type;
 	detail::uninitialized_backout<NoThrowForwardIt> backout{ d_first, d_first };
-	for (; first != last; ++first, (void) ++backout.current)
+	for (; first != last; ++first, (void)++backout.current)
 	{
-		auto addr = static_cast<void*>(mystl::addressof(*backout.current));
-		if constexpr (std::is_lvalue_reference_v<decltype(*first)>)
-		{
-			::new (addr) ValueType(mystl::move(*first));
-		}
-		else
-		{
-			::new (addr) ValueType(*first);
-		}
+		::new (static_cast<void*>(mystl::addressof(*backout.current))) ValueType(mystl::move(*first));
 	}
 	backout.release();
 	return backout.current;
@@ -212,17 +204,9 @@ pair<InputIt, NoThrowForwardIt> uninitialized_move_n(InputIt first, Size count, 
 {
 	using ValueType = typename mystl::iterator_traits<NoThrowForwardIt>::value_type;
 	detail::uninitialized_backout<NoThrowForwardIt> backout{ d_first, d_first };
-	for (; count > 0; ++first, (void) ++backout.current, --count)
+	for (; count > 0; ++first, (void)++backout.current, --count)
 	{
-		auto addr = static_cast<void*>(mystl::addressof(*backout.current));
-		if constexpr (std::is_lvalue_reference_v<decltype(*first)>)
-		{
-			::new (addr) ValueType(mystl::move(*first));
-		}
-		else
-		{
-			::new (addr) ValueType(*first);
-		}
+		::new (static_cast<void*>(mystl::addressof(*backout.current))) ValueType(mystl::move(*first));
 	}
 	backout.release();
 	return { first, backout.current };
